@@ -108,6 +108,7 @@ configBackup="false"     # Change to "false" to skip config backup (which render
 emailBackup="false"     # Change to "true" to email TrueNAS config backup
 saveBackup="true"       # Change to "false" to delete TrueNAS config backup after mail is sent; "true" to keep it in dir below
 backupLocation="/root/backup"    # Directory in which to save TrueNAS config backups
+backupPassphrase=""     # The GPG passphrase to encrypt the config backup before sending it by email; only relevant when `configBackup` and `emailBackup` are true. Leave empty to disable.
 
 ### UPS status summary settings
 reportUPS="false"        # Change to "false" to skip reporting the status of the UPS
@@ -159,8 +160,19 @@ function ConfigBackup () {
             cd "/tmp/" || exit;
             tar -czf "${tarfile}" "./${filename}.db" "./config_backup.md5" "./config_backup.sha256" "./pwenc_secret"
         )
+        test -z "${backupPassphrase}" || (
+            cd "$(dirname "${tarfile}")" || exit;
+            gpg --symmetric --cipher-algo AES256 --batch --passphrase "${backupPassphrase}" "$(basename "${tarfile}")"
+        )
         {
-			if [ "${emailBackup}" = "true" ]; then
+            if [ "${emailBackup}" = "true" -a -n "${backupPassphrase}" ]; then
+                # Write MIME section header for file attachment (encoded with base64)
+                echo "--${boundary}"
+                echo "Content-Type: application/pgp-encrypted"
+                echo "Content-Transfer-Encoding: base64"
+                echo "Content-Disposition: attachment; filename=${filename}.tar.gz.gpg"
+                base64 "${tarfile}.gpg"
+            elif [ "${emailBackup}" = "true" ]; then
 				# Write MIME section header for file attachment (encoded with base64)
 				echo "--${boundary}"
 				echo -e "Content-Type: application/tar+gzip\n"
@@ -183,6 +195,7 @@ function ConfigBackup () {
         rm "/tmp/config_backup.md5"
         rm "/tmp/config_backup.sha256"
         rm "${tarfile}"
+        test -z "${backupPassphrase}" || rm "${tarfile}.gpg"
     fi
 }
 
@@ -1253,6 +1266,11 @@ md5
 sha256
 base64
 )
+if [ -n "${backupPassphrase}" ]; then
+commands+=(
+gpg
+)
+fi
 fi
 if [ "${reportUPS}" = "true" ]; then
 commands+=(
