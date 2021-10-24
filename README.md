@@ -1,18 +1,21 @@
 # ZPool, SMART, and UPS Status Report with TrueNAS Config Backup
 Original Script By: joeschmuck<br>
-Modified By: bidelu0hm, melp, fohlsso2, onlinepcwizard, ninpucho, isentropik, rotx, dak180<br>
-Last Edited By: dak180
+Modified By: bidelu0hm, melp, fohlsso2, onlinepcwizard, ninpucho, isentropik, rotx, dak180, zanechua<br>
+Last Edited By: zanechua
 
 Preview of the output here: https://i.imgur.com/jKwraw4.png<br>
 When a resilver is in progress: https://i.imgur.com/CUNUZ7r.png<br>
 After the resilver is done: https://i.imgur.com/I43MLLf.png<br>
 When a scrub is in progess: https://i.imgur.com/YGmvZT4.png<br><br>
 
-**At a minimum, enter email address and set defaultFile to 0 in the generated config file. Feel free to edit other user parameters as needed. Backup has been disabled by default so if it is required please set to true.**<br><br>
+**At a minimum, set defaultFile to 0 in the generated config file. Feel free to edit other user parameters as needed. Backup has been disabled by default so if it is required please set to true.**<br><br>
 
-**Current Version: v1.7**
+**Current Version: v1.8**
 
 **Changelog:**
+
+*v1.8* (zanechua)
+- Look up e-mail and sender name from the system database
 
 *v1.7* (dak180)
  - Refactor to reduce dependence on awk

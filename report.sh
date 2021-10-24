@@ -5,16 +5,18 @@
 
 ###### ZPool, SMART, and UPS Status Report with TrueNAS Config Backup
 ### Original Script By: joeschmuck
-### Modified By: bidelu0hm, melp, fohlsso2, onlinepcwizard, ninpucho, isentropik, dak180
-### Last Edited By: dak180
+### Modified By: bidelu0hm, melp, fohlsso2, onlinepcwizard, ninpucho, isentropik, dak180, zanechua
+### Last Edited By: zanechua
 
-### At a minimum, enter email address and set defaultFile to 0 in the config file.
+### At a minimum, set defaultFile to 0 in the config file.
 ### Feel free to edit other user parameters as needed.
 
-### Current Version: v1.7
-### https://github.com/dak180/FreeNAS-Report
+### Current Version: v1.8
+### https://github.com/bibz/FreeNAS-Report
 
 ### Changelog:
+# v1.8
+#   - Look up e-mail and sender name from the system database
 # v1.7
 #   - Refactor to reduce dependence on awk
 #   - Use a separate config file
@@ -78,8 +80,6 @@ function rpConfig () {
 defaultFile="1"
 
 ###### User-definable Parameters
-### Email Address
-email="email@address.com"
 
 ### Global table colors
 okColor="#c9ffcc"       # Hex code for color to use in SMART Status column if drives pass (default is light green, #c9ffcc)
