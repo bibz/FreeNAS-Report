@@ -1,7 +1,7 @@
 # ZPool, SMART, and UPS Status Report with TrueNAS Config Backup
 Original Script By: joeschmuck<br>
-Modified By: bidelu0hm, melp, fohlsso2, onlinepcwizard, ninpucho, isentropik, rotx, dak180, zanechua<br>
-Last Edited By: zanechua
+Modified By: bidelu0hm, melp, fohlsso2, onlinepcwizard, ninpucho, isentropik, rotx, dak180, zanechua, bibz<br>
+Last Edited By: bibz
 
 Preview of the output here: https://i.imgur.com/jKwraw4.png<br>
 When a resilver is in progress: https://i.imgur.com/CUNUZ7r.png<br>
@@ -10,9 +10,14 @@ When a scrub is in progess: https://i.imgur.com/YGmvZT4.png<br><br>
 
 **At a minimum, set defaultFile to 0 in the generated config file. Feel free to edit other user parameters as needed. Backup has been disabled by default so if it is required please set to true.**<br><br>
 
-**Current Version: v1.8**
+**Current Version: v1.9**
 
 **Changelog:**
+
+*v1.9* (bibz)
+- Optionally encrypt the config backup before sending it by email
+- Fix wrong MIME type for config backup
+- Fix missing drive temperature caused an error
 
 *v1.8* (zanechua)
 - Look up e-mail and sender name from the system database

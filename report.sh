@@ -5,16 +5,20 @@
 
 ###### ZPool, SMART, and UPS Status Report with TrueNAS Config Backup
 ### Original Script By: joeschmuck
-### Modified By: bidelu0hm, melp, fohlsso2, onlinepcwizard, ninpucho, isentropik, dak180, zanechua
-### Last Edited By: zanechua
+### Modified By: bidelu0hm, melp, fohlsso2, onlinepcwizard, ninpucho, isentropik, dak180, zanechua, bibz
+### Last Edited By: bibz
 
 ### At a minimum, set defaultFile to 0 in the config file.
 ### Feel free to edit other user parameters as needed.
 
-### Current Version: v1.8
+### Current Version: v1.9
 ### https://github.com/bibz/FreeNAS-Report
 
 ### Changelog:
+# v1.9
+#   - Optionally encrypt the config backup before sending it by email
+#   - Fix wrong MIME type for config backup
+#   - Fix missing drive temperature caused an error
 # v1.8
 #   - Look up e-mail and sender name from the system database
 # v1.7
